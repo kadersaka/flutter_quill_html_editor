@@ -127,9 +127,6 @@ class _MyAppState extends State<MyApp> {
                 backgroundColor: _backgroundColor,
                 inputAction: InputAction.newline,
                 onEditingComplete: (s) => debugPrint('Editing completed $s'),
-                loadingBuilder: (context) {
-                  return const Center(child: CircularProgressIndicator.adaptive());
-                },
                 onFocusChanged: (focus) {
                   debugPrint('has focus $focus');
                   setState(() {
