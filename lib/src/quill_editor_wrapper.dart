@@ -208,13 +208,15 @@ class QuillHtmlEditorState extends State<QuillHtmlEditor> {
             });
           }
 
-          if (snap.connectionState == ConnectionState.waiting && !_editorLoaded) {
+          if (snap.connectionState == ConnectionState.waiting) {
             if (widget.loadingBuilder != null) {
               return widget.loadingBuilder!(context);
             } else {
               return const SizedBox(
                 child: Center(
-                  child: CircularProgressIndicator.adaptive(),
+                  child: CircularProgressIndicator(
+                    strokeWidth: 0.3,
+                  ),
                 ),
               );
             }
@@ -236,11 +238,11 @@ class QuillHtmlEditorState extends State<QuillHtmlEditor> {
           onPageStarted: (s) {
             _editorLoaded = false;
           },
-          ignoreAllGestures: true,
+          ignoreAllGestures: false,
           width: width,
           onWebViewCreated: (controller) => _webviewController = controller,
           onPageFinished: (src) {
-            Future.delayed(const Duration(milliseconds: 100)).then((value) {
+            Future.delayed(const Duration(milliseconds: 500)).then((value) {
               _editorLoaded = true;
               debugPrint('_editorLoaded $_editorLoaded');
               if (mounted) {
@@ -258,11 +260,6 @@ class QuillHtmlEditorState extends State<QuillHtmlEditor> {
               }
               widget.controller._editorLoadedController?.add('');
             });
-            _editorLoaded = true;
-            debugPrint('_editorLoaded $_editorLoaded');
-            if (mounted) {
-              setState(() {});
-            }
           },
           dartCallBacks: {
             DartCallback(
@@ -314,6 +311,12 @@ class QuillHtmlEditorState extends State<QuillHtmlEditor> {
                         finalText = "";
                       } else {
                         finalText = map;
+                        //  debugPrint(" =========> _editorLoaded: $_editorLoaded <=========");
+                        //  debugPrint(" =========> HIDE LOADER <=========");
+                        if (mounted) {
+                          _editorLoaded = true;
+                          setState(() {});
+                        }
                       }
                       if (widget.onTextChanged != null) {
                         widget.onTextChanged!(finalText);
@@ -345,6 +348,12 @@ class QuillHtmlEditorState extends State<QuillHtmlEditor> {
             DartCallback(
                 name: 'OnEditingCompleted',
                 callBack: (map) {
+                  /*
+                  if (mounted) {
+                    _editorLoaded = true;
+                    setState(() {});
+                  }
+                  */
                   var tempText = "";
                   if (tempText == map) {
                     return;
@@ -418,10 +427,26 @@ class QuillHtmlEditorState extends State<QuillHtmlEditor> {
                   height: widget.minHeight,
                   child: const Center(
                     child: CircularProgressIndicator(
-                      strokeWidth: 0.3,
+                      strokeWidth: 2,
                     ),
                   ),
                 ),
+          /* Column(
+            children: [
+              const Text(" ========> LOADER <========"),
+              widget.loadingBuilder != null
+                  ? widget.loadingBuilder!(context)
+                  : SizedBox(
+                      height: widget.minHeight,
+                      child: const Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 0.3,
+                        ),
+                      ),
+                    ),
+            ],
+          ),
+          */
         )
       ],
     );

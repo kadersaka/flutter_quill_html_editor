@@ -49,11 +49,11 @@ class _MyAppState extends State<MyApp> {
     controller = QuillEditorController();
 
     Future.delayed(const Duration(seconds: 3), () {
-      controller.setText(" ===============> TEST <=============== ");
+      controller.setText(" ==============> TEXT <==============");
     });
 
     controller.onTextChanged((text) {
-      debugPrint('listening to $text');
+      debugPrint('listening to $text Length: ${text.length}');
     });
     controller.onEditorLoaded(() {
       debugPrint('Editor Loaded :)');
@@ -127,6 +127,13 @@ class _MyAppState extends State<MyApp> {
                 backgroundColor: _backgroundColor,
                 inputAction: InputAction.newline,
                 onEditingComplete: (s) => debugPrint('Editing completed $s'),
+                loadingBuilder: (context) {
+                  return const Center(
+                      child: CircularProgressIndicator(
+                    strokeWidth: 1,
+                    color: Colors.red,
+                  ));
+                },
                 onFocusChanged: (focus) {
                   debugPrint('has focus $focus');
                   setState(() {
