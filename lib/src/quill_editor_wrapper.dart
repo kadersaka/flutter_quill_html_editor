@@ -408,18 +408,22 @@ class QuillHtmlEditorState extends State<QuillHtmlEditor> {
             androidEnableHybridComposition: true,
           ),
         ),
-        Visibility(
-            visible: !_editorLoaded,
-            child: widget.loadingBuilder != null
-                ? widget.loadingBuilder!(context)
-                : SizedBox(
-                    height: widget.minHeight,
-                    child: const Center(
-                      child: CircularProgressIndicator(
-                        strokeWidth: 0.3,
-                      ),
+        /*  Visibility(
+          visible: !_editorLoaded,
+          child: widget.loadingBuilder != null
+              ? widget.loadingBuilder!(context)
+              : 
+              
+              SizedBox(
+                  height: widget.minHeight,
+                  child: const Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 0.3,
                     ),
-                  ))
+                  ),
+                ),
+        )
+        */
       ],
     );
   }
