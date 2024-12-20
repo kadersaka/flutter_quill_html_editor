@@ -208,7 +208,7 @@ class QuillHtmlEditorState extends State<QuillHtmlEditor> {
             });
           }
 
-          if (snap.connectionState == ConnectionState.waiting) {
+          if (snap.connectionState == ConnectionState.waiting && !_editorLoaded) {
             if (widget.loadingBuilder != null) {
               return widget.loadingBuilder!(context);
             } else {
