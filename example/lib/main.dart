@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   ];
 
   final _toolbarColor = Colors.grey.shade200;
-  final _backgroundColor = Colors.white70;
+  final _backgroundColor = Colors.blue;
   final _toolbarIconColor = Colors.black87;
   final _editorTextStyle =
       const TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.normal, fontFamily: 'Roboto');
@@ -45,14 +45,19 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    super.initState();
     controller = QuillEditorController();
+
+    Future.delayed(const Duration(seconds: 3), () {
+      controller.setText(" ===============> TEST <=============== ");
+    });
+
     controller.onTextChanged((text) {
       debugPrint('listening to $text');
     });
     controller.onEditorLoaded(() {
       debugPrint('Editor Loaded :)');
     });
-    super.initState();
   }
 
   @override
@@ -123,11 +128,7 @@ class _MyAppState extends State<MyApp> {
                 inputAction: InputAction.newline,
                 onEditingComplete: (s) => debugPrint('Editing completed $s'),
                 loadingBuilder: (context) {
-                  return const Center(
-                      child: CircularProgressIndicator(
-                    strokeWidth: 1,
-                    color: Colors.red,
-                  ));
+                  return const Center(child: CircularProgressIndicator.adaptive());
                 },
                 onFocusChanged: (focus) {
                   debugPrint('has focus $focus');

@@ -8,15 +8,12 @@ import 'dart:js' as js;
 import 'package:flutter/material.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:quill_html_editor_v2/src/widgets/webviewx/src/controller/impl/web.dart';
-import 'package:quill_html_editor_v2/src/widgets/webviewx/src/controller/interface.dart'
-    as ctrl_interface;
+import 'package:quill_html_editor_v2/src/widgets/webviewx/src/controller/interface.dart' as ctrl_interface;
 import 'package:quill_html_editor_v2/src/widgets/webviewx/src/utils/constants.dart';
-import 'package:quill_html_editor_v2/src/widgets/webviewx/src/utils/dart_ui_fix.dart'
-    as ui;
+import 'package:quill_html_editor_v2/src/widgets/webviewx/src/utils/dart_ui_fix.dart' as ui;
 import 'package:quill_html_editor_v2/src/widgets/webviewx/src/utils/logger.dart';
 import 'package:quill_html_editor_v2/src/widgets/webviewx/src/utils/utils.dart';
-import 'package:quill_html_editor_v2/src/widgets/webviewx/src/view/interface.dart'
-    as view_interface;
+import 'package:quill_html_editor_v2/src/widgets/webviewx/src/view/interface.dart' as view_interface;
 
 /// Web implementation
 class WebViewX extends StatefulWidget implements view_interface.WebViewX {
@@ -48,8 +45,7 @@ class WebViewX extends StatefulWidget implements view_interface.WebViewX {
   /// Callback which returns a reference to the [WebViewXController]
   /// being created.
   @override
-  final Function(ctrl_interface.WebViewXController controller)?
-      onWebViewCreated;
+  final Function(ctrl_interface.WebViewXController controller)? onWebViewCreated;
 
   /// A set of [EmbeddedJsContent].
   ///
@@ -125,8 +121,7 @@ class WebViewX extends StatefulWidget implements view_interface.WebViewX {
     this.dartCallBacks = const {},
     this.ignoreAllGestures = false,
     this.javascriptMode = JavascriptMode.unrestricted,
-    this.initialMediaPlaybackPolicy =
-        AutoMediaPlaybackPolicy.requireUserActionForAllMediaTypes,
+    this.initialMediaPlaybackPolicy = AutoMediaPlaybackPolicy.requireUserActionForAllMediaTypes,
     this.onPageStarted,
     this.onPageFinished,
     this.navigationDelegate,
@@ -165,8 +160,7 @@ class _WebViewXState extends State<WebViewX> {
 
     if (widget.initialSourceType == SourceType.html ||
         widget.initialSourceType == SourceType.urlBypass ||
-        (widget.initialSourceType == SourceType.url &&
-            widget.initialContent == 'about:blank')) {
+        (widget.initialSourceType == SourceType.url && widget.initialContent == 'about:blank')) {
       _connectJsToFlutter(then: _callOnWebViewCreatedCallback);
     } else {
       _callOnWebViewCreatedCallback();
@@ -366,8 +360,7 @@ class _WebViewXState extends State<WebViewX> {
 
     final allow = widget.webSpecificParams.additionalAllowOptions;
 
-    if (widget.initialMediaPlaybackPolicy ==
-        AutoMediaPlaybackPolicy.alwaysAllow) {
+    if (widget.initialMediaPlaybackPolicy == AutoMediaPlaybackPolicy.alwaysAllow) {
       allow.add('autoplay');
     }
 
@@ -463,8 +456,7 @@ class _WebViewXState extends State<WebViewX> {
     final href = dartObj['href'] as String;
     _debugLog(dartObj.toString());
 
-    if (!await _checkNavigationAllowed(
-        href, webViewXController.value.sourceType)) {
+    if (!await _checkNavigationAllowed(href, webViewXController.value.sourceType)) {
       _debugLog('Navigation not allowed for source:\n$href\n');
       return;
     }
