@@ -299,6 +299,10 @@ class QuillHtmlEditorState extends State<QuillHtmlEditor> {
                 callBack: (map) {
                   var tempText = "";
                   if (tempText == map) {
+                    if (mounted && _editorLoaded == false) {
+                      _editorLoaded = true;
+                      setState(() {});
+                    }
                     return;
                   } else {
                     tempText = map;
