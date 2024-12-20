@@ -313,15 +313,15 @@ class QuillHtmlEditorState extends State<QuillHtmlEditor> {
                         finalText = map;
                         //  debugPrint(" =========> _editorLoaded: $_editorLoaded <=========");
                         //  debugPrint(" =========> HIDE LOADER <=========");
-                        if (mounted) {
-                          _editorLoaded = true;
-                          setState(() {});
-                        }
                       }
                       if (widget.onTextChanged != null) {
                         widget.onTextChanged!(finalText);
                       }
                       widget.controller._changeController!.add(finalText);
+                      if (mounted) {
+                        _editorLoaded = true;
+                        setState(() {});
+                      }
                     }
                   } catch (e) {
                     if (!kReleaseMode) {
