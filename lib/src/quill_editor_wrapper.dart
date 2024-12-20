@@ -242,10 +242,11 @@ class QuillHtmlEditorState extends State<QuillHtmlEditor> {
           width: width,
           onWebViewCreated: (controller) => _webviewController = controller,
           onPageFinished: (src) {
-            Future.delayed(const Duration(milliseconds: 500)).then((value) {
+            Future.delayed(const Duration(milliseconds: 100)).then((value) {
               _editorLoaded = true;
               debugPrint('_editorLoaded $_editorLoaded');
-              if (mounted) {
+              if (mounted && _editorLoaded == false) {
+                _editorLoaded = true;
                 setState(() {});
               }
               widget.controller.enableEditor(isEnabled);
@@ -322,6 +323,11 @@ class QuillHtmlEditorState extends State<QuillHtmlEditor> {
                         widget.onTextChanged!(finalText);
                       }
                       widget.controller._changeController!.add(finalText);
+                    }
+
+                    if (mounted && _editorLoaded == false) {
+                      _editorLoaded = true;
+                      setState(() {});
                     }
                   } catch (e) {
                     if (!kReleaseMode) {
