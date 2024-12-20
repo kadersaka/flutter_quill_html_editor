@@ -318,7 +318,7 @@ class QuillHtmlEditorState extends State<QuillHtmlEditor> {
                         widget.onTextChanged!(finalText);
                       }
                       widget.controller._changeController!.add(finalText);
-                      if (mounted) {
+                      if (mounted && _editorLoaded == false) {
                         _editorLoaded = true;
                         setState(() {});
                       }
