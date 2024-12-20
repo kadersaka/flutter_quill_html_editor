@@ -212,10 +212,11 @@ class QuillHtmlEditorState extends State<QuillHtmlEditor> {
             if (widget.loadingBuilder != null) {
               return widget.loadingBuilder!(context);
             } else {
-              return SizedBox(
-                height: widget.minHeight,
-                child: const Center(
-                  child: CircularProgressIndicator(),
+              return const SizedBox(
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.green,
+                  ),
                 ),
               );
             }
