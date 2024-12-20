@@ -318,15 +318,16 @@ class QuillHtmlEditorState extends State<QuillHtmlEditor> {
                         widget.onTextChanged!(finalText);
                       }
                       widget.controller._changeController!.add(finalText);
-                      if (mounted && _editorLoaded == false) {
-                        _editorLoaded = true;
-                        setState(() {});
-                      }
                     }
                   } catch (e) {
                     if (!kReleaseMode) {
                       debugPrint(e.toString());
                     }
+                  }
+
+                  if (mounted && _editorLoaded == false) {
+                    _editorLoaded = true;
+                    setState(() {});
                   }
                 }),
             DartCallback(
