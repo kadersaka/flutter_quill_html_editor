@@ -36,14 +36,14 @@ flutter:
   plugin:
     platforms:
       android:
-        default_package: quill_html_editor_v2
-        pluginClass: 'com.example.quill_html_editor_v2.QuillHtmlEditorPlugin'
+        # default_package: quill_html_editor_v2
+        # pluginClass: 'com.example.quill_html_editor_v2.QuillHtmlEditorPlugin'
       ios:
-        default_package: quill_html_editor_v2
-        pluginClass: 'QuillHtmlEditorPlugin'
+        # default_package: quill_html_editor_v2
+        # pluginClass: 'QuillHtmlEditorPlugin'
       web:
-        default_package: quill_html_editor_v2
-        pluginClass: 'QuillHtmlEditorPlugin'
+        # default_package: quill_html_editor_v2
+        # pluginClass: 'QuillHtmlEditorPlugin'
   assets:
       - packages/quill_html_editor_v2/assets/camera_roll_icon.png
       - packages/quill_html_editor_v2/assets/h1_dark.png
